@@ -6,6 +6,23 @@ public class PasswordValidator {
 
     static boolean validate(String pw) {
         // TODO: implement ตาม spec ใน README.md (R1-R6)
-        return false;
+        if(pw == null) throw new IllegalArgumentException();
+
+        if(pw.length()<8 || pw.length()>20) return false;
+        
+        boolean hasUpper = false;
+        boolean hasLower = false;
+        boolean hasNumber = false;
+        boolean hasSpace = true;
+        
+        for(int i = 0; i < pw.length(); i++){
+            if(Character.isUpperCase(pw.charAt(i))) hasUpper = true;
+            if(Character.isLowerCase(pw.charAt(i))) hasLower = true;
+            if(Character.isDigit(pw.charAt(i))) hasNumber = true;
+            if(Character.isWhitespace(pw.charAt(i))) hasSpace = false;
+            
+        }
+        
+        return hasLower && hasUpper && hasNumber && hasSpace;
     }
 }
